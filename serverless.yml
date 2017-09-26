@@ -1,0 +1,25 @@
+service: serverless-nodemailer
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: ap-southeast-1
+  stage: dev
+
+functions:
+  mailsender:
+    handler: handler.main
+    events:
+      - http:
+          path: mailsender
+          method: post
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    host: 0.0.0.0
+    port: 4000
+    babelOptions:
+      presets: ["es2015"]
